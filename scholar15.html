@@ -1,1 +1,95 @@
 <h1>Kristaps Porzingis is the unicorn</h1>
+<!DOCTYPE html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
+<link href="https://fonts.googleapis.com/css?family=Dhurjati" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+<script src="/assets/jquery.js"></script>
+<style>
+body {
+  text-align: center;
+  font-family: 'Dhurjati', sans-serif;
+  font-size: 20px;
+  background: #e6eaf0;
+}
+button {
+  margin: 40px;
+}
+input {
+  font-size: 24px;
+}
+.fill {
+  background: white;
+  color: red;
+  border-bottom: 2px black solid;
+  font-family: 'Rubik', sans-serif;
+  padding: 0 6px;
+  margin: 4px;
+}
+</style>
+</head>
+
+<body>
+<div class="prompt"></div>
+<button>Next</button>
+<script>
+// List of prompts for the user
+var prompts = [
+	'Type a name',
+	'Type an adjective',
+	'Type an animal',
+	'Type the first name',
+	'Type a game',
+	'Type another animal',
+	'Type another name',
+	'Type the second name',
+	'Type another adjective',
+	'Type the second name',
+	'Type the first name',
+	'Type the first animal',
+	'Type the first name',
+	'Type the first adjective',
+	'Type the first animal',
+   ];
+
+var answers=[];
+// Keep track of current prompt we're on
+var currentPrompt = 0;
+
+// A function that will call the next prompt
+var nextPrompt = function() {
+  //if there's no answer in the form
+  if (currentPrompt != 0){
+    answers.push($('input').val());
+  }
+	// if there is a next prompt
+	if (currentPrompt < prompts.length) {
+		// put first prompt in all html elements with class 
+		$('.prompt').html(prompts[currentPrompt] +'<br><input type="text">');
+		// move the next prompt into variable currentPrompt 
+		currentPrompt = currentPrompt + 1;
+	}
+	//or else if we're at the end of the array
+	else {
+		// put a new message into the html.
+		showFinal();
+	}
+}
+
+//puts user answers into HTML
+var showFinal = function() {
+  $('.prompt').html('This is the story of <span class="fill">'+answers[0]+'</span> and the <span class="fill">'+answers[1]+'</span> <span class="fill">'+answers[2]+'</span>. One day <span class="fill">'+answers[3]+'</span> was eating <span class="fill">'+answers[4]+'</span> and suddenly found a <span class="fill">'+answers[5]+'</span> , a large <span class="fill">'+answers[6]+'</span>. <span class="fill">'+answers[7]+'</span> said to his mom that he found a cat. She said it is <span class="fill">'+answers[8]+'</span> and how they are better than mine. <span class="fill">'+answers[9]+'</span> told <span class="fill">'+answers[10]+'</span> that he is a rare player in the NBA. Rare like a <span class="fill">'+answers[11]+'</span>. That is the story of <span class="fill">'+answers[12]+'</span> and the <span class="fill">'+answers[13]+'</span> <span class="fill">'+answers[14]+'</span>.');
+  //and then hide the button
+  $('button').hide();
+}
+// run nextPrompt function when button is clicked
+$('button').click(function() {
+	nextPrompt();
+});
+
+// Show the first prompt as soon as js loads
+nextPrompt();
+</script>
+
+</body>
